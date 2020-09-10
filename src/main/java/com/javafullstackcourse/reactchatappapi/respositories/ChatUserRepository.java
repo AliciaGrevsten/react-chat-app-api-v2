@@ -7,5 +7,5 @@ public interface ChatUserRepository extends JpaRepository<ChatUser, Integer> {
 
     ChatUser getById(int id);
 
-    ChatUser getByUsername(String username);
+    ChatUser getChatUserByUsername(String username);
 }

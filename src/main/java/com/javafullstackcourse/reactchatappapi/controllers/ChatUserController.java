@@ -140,11 +140,11 @@ public class ChatUserController {
         CommonResponse cr = new CommonResponse();
         HttpStatus resp;
 
-        ChatUser fetchedUser = userRepository.getByUsername(user.username);
+        ChatUser fetchedUser = userRepository.getChatUserByUsername(user.username);
 
         if(fetchedUser != null) {
             if(fetchedUser.password.equals(user.password)) {
-                cr.data = user;
+                cr.data = fetchedUser;
                 cr.message = "User credential approved.";
                 resp = HttpStatus.OK;
             } else {
@@ -170,19 +170,9 @@ public class ChatUserController {
         Command cmd = new Command(request);
         HttpStatus resp;
 
-        ChatUser newUser = new ChatUser();
-
         if (user.username != null && user.password != null) {
 
-            if(userRepository.getByUsername(user.username) == null) {
-                /*newUser.username = user.username;
-                newUser.password = user.password;
-
-                if (user.profileImage != null) {
-                    newUser.profileImage = user.profileImage;
-                }
-
-                userRepository.save(newUser);*/
+            if(userRepository.getChatUserByUsername(user.username) == null) {
                 user = userRepository.save(user);
 
                 cr.data = user;
